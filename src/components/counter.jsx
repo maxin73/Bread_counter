@@ -1,6 +1,6 @@
 import {React, useState } from 'react';
 
-const Counter = ({bread}) => {
+const counter = ({bread}) => {
   const [count, setCount] = useState(0);
 
   return (
@@ -19,4 +19,4 @@ const Counter = ({bread}) => {
   )
 }
 
-export default Counter
+export default counter
