@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import * as htmlToImage from 'html-to-image';
+import { toPng } from 'html-to-image';
 import Counter from "./components/counter.jsx";
 
 function App() {
@@ -53,6 +55,9 @@ function App() {
   
   const [breadData, setBreadData] = useState(initialBreadData);
 
+  const screenshotRef = React.useRef();
+  const [screenshot, setScreenshot] = useState(null);
+
   const updateBreadCount = (breadName, increment) => {
     setBreadData((prevBreadData) => 
       prevBreadData.map((bread) => 
@@ -70,9 +75,19 @@ function App() {
   const genre5 = breadData.filter((bread) => bread.genre === "5");
   const genre6 = breadData.filter((bread) => bread.genre === "6");
 
+  const captureScreenshot = () => {
+    htmlToImage.toPng(screenshotRef.current)
+      .then((dataUrl) => {
+        setScreenshot(dataUrl);
+      })
+      .catch((error) => {
+        console.error('Error capturing screenshot:', error);
+      });
+  };
+
   return (
     <>
-    <section className="flex">
+    <section ref={screenshotRef} className="flex">
       <div className="genre-left">
         <div className="genre1">
         {genre1.map((bread) => (
@@ -144,6 +159,13 @@ function App() {
         </div>
       </div>
     </section>
+    <button onClick={captureScreenshot}>Capture Screenshot</button>
+      {screenshot && (
+        <div>
+          <h2>Screenshot:</h2>
+          <img src={screenshot} alt="Captured Screenshot" />
+        </div>
+      )}
     </>
   );
 }
