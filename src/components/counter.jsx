@@ -9,10 +9,10 @@ const counter = ({bread}) => {
         <p className="pr-2 font-bold text-sm">{bread}</p>
         <p>{count}</p>
       </div>
-      <button className="bg-gray-100 mr-2" onClick={() => setCount(count + 1)}>
+      <button className="bg-gray-100 hover:bg-gray-300 mr-2" onClick={() => setCount(count + 1)}>
         +
       </button>
-      <button className="bg-gray-100" onClick={() => setCount(count - 1)}>
+      <button className="bg-gray-100 hover:bg-gray-300" onClick={() => setCount(count - 1)}>
         -
       </button>
     </div>

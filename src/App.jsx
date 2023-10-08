@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import * as htmlToImage from 'html-to-image';
-import { toPng } from 'html-to-image';
-import Counter from "./components/counter.jsx";
+import Counter from "./components/Counter.jsx";
+import ScreenshotCapture from './components/ScreenshotCapture.jsx';
 
 function App() {
+  const today = new Date();
+  const month = today.getMonth() +1;
+  const date = today.getDate();
+
   const initialBreadData = [
     { name: 'カレーパン(牛肉)', count: 0, genre: '1' },
     { name: 'カレーパン(野菜)', count: 0, genre: '1' },
@@ -56,7 +59,6 @@ function App() {
   const [breadData, setBreadData] = useState(initialBreadData);
 
   const screenshotRef = React.useRef();
-  const [screenshot, setScreenshot] = useState(null);
 
   const updateBreadCount = (breadName, increment) => {
     setBreadData((prevBreadData) => 
@@ -75,97 +77,86 @@ function App() {
   const genre5 = breadData.filter((bread) => bread.genre === "5");
   const genre6 = breadData.filter((bread) => bread.genre === "6");
 
-  const captureScreenshot = () => {
-    htmlToImage.toPng(screenshotRef.current)
-      .then((dataUrl) => {
-        setScreenshot(dataUrl);
-      })
-      .catch((error) => {
-        console.error('Error capturing screenshot:', error);
-      });
-  };
-
   return (
     <>
-    <section ref={screenshotRef} className="flex">
-      <div className="genre-left">
-        <div className="genre1">
-        {genre1.map((bread) => (
-            <Counter 
-              key={bread.name}
-              bread={bread.name}
-              count={bread.count}
-              onIncrement={() => updateBreadCount(bread.name, 1)}
-              onDecrement={() => updateBreadCount(bread.name, -1)}
-            />
-          ))}
+    <div ref={screenshotRef}>
+      <h2 className="date mt-5 ml-3 text-xl underline">
+        {month}月{date}日
+      </h2>
+      <section className="flex">
+        <div className="genre-left">
+          <div className="genre1">
+          {genre1.map((bread) => (
+              <Counter 
+                key={bread.name}
+                bread={bread.name}
+                count={bread.count}
+                onIncrement={() => updateBreadCount(bread.name, 1)}
+                onDecrement={() => updateBreadCount(bread.name, -1)}
+              />
+            ))}
+          </div>
+          <div className="genre2">
+            {genre2.map((bread) => (
+              <Counter 
+                key={bread.name}
+                bread={bread.name}
+                count={bread.count}
+                onIncrement={() => updateBreadCount(bread.name, 1)}
+                onDecrement={() => updateBreadCount(bread.name, -1)}
+              />
+            ))}
+          </div>
+          <div className="genre3">
+            {genre3.map((bread) => (
+              <Counter 
+                key={bread.name}
+                bread={bread.name}
+                count={bread.count}
+                onIncrement={() => updateBreadCount(bread.name, 1)}
+                onDecrement={() => updateBreadCount(bread.name, -1)}
+              />
+            ))}
+          </div>
+          <div className="genre4">
+            {genre4.map((bread) => (
+              <Counter 
+                key={bread.name}
+                bread={bread.name}
+                count={bread.count}
+                onIncrement={() => updateBreadCount(bread.name, 1)}
+                onDecrement={() => updateBreadCount(bread.name, -1)}
+              />
+            ))}
+          </div>
         </div>
-        <div className="genre2">
-          {genre2.map((bread) => (
-            <Counter 
-              key={bread.name}
-              bread={bread.name}
-              count={bread.count}
-              onIncrement={() => updateBreadCount(bread.name, 1)}
-              onDecrement={() => updateBreadCount(bread.name, -1)}
-            />
-          ))}
+        <div className="genre-right">
+          <div className="genre5">
+            {genre5.map((bread) => (
+              <Counter 
+                key={bread.name}
+                bread={bread.name}
+                count={bread.count}
+                onIncrement={() => updateBreadCount(bread.name, 1)}
+                onDecrement={() => updateBreadCount(bread.name, -1)}
+              />
+            ))}
+          </div>
+          <div className="genre6">
+            {genre6.map((bread) => (
+              <Counter 
+                key={bread.name}
+                bread={bread.name}
+                count={bread.count}
+                onIncrement={() => updateBreadCount(bread.name, 1)}
+                onDecrement={() => updateBreadCount(bread.name, -1)}
+              />
+            ))}
+          </div>
         </div>
-        <div className="genre3">
-          {genre3.map((bread) => (
-            <Counter 
-              key={bread.name}
-              bread={bread.name}
-              count={bread.count}
-              onIncrement={() => updateBreadCount(bread.name, 1)}
-              onDecrement={() => updateBreadCount(bread.name, -1)}
-            />
-          ))}
-        </div>
-        <div className="genre4">
-          {genre4.map((bread) => (
-            <Counter 
-              key={bread.name}
-              bread={bread.name}
-              count={bread.count}
-              onIncrement={() => updateBreadCount(bread.name, 1)}
-              onDecrement={() => updateBreadCount(bread.name, -1)}
-            />
-          ))}
-        </div>
-      </div>
-      <div className="genre-right">
-        <div className="genre5">
-          {genre5.map((bread) => (
-            <Counter 
-              key={bread.name}
-              bread={bread.name}
-              count={bread.count}
-              onIncrement={() => updateBreadCount(bread.name, 1)}
-              onDecrement={() => updateBreadCount(bread.name, -1)}
-            />
-          ))}
-        </div>
-        <div className="genre6">
-          {genre6.map((bread) => (
-            <Counter 
-              key={bread.name}
-              bread={bread.name}
-              count={bread.count}
-              onIncrement={() => updateBreadCount(bread.name, 1)}
-              onDecrement={() => updateBreadCount(bread.name, -1)}
-            />
-          ))}
-        </div>
-      </div>
-    </section>
-    <button onClick={captureScreenshot}>Capture Screenshot</button>
-      {screenshot && (
-        <div>
-          <h2>Screenshot:</h2>
-          <img src={screenshot} alt="Captured Screenshot" />
-        </div>
-      )}
+      </section>
+      <ScreenshotCapture screenshotRef={screenshotRef} />
+    </div>
     </>
   );
 }
