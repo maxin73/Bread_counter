@@ -79,7 +79,7 @@ function App() {
 
   return (
     <>
-    <div ref={screenshotRef}>
+    <div ref={screenshotRef} className="bg-white">
       <h2 className="date mt-5 ml-3 text-xl underline">
         {month}月{date}日
       </h2>
