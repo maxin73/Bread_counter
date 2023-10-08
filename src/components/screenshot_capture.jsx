@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import * as htmlToImage from 'html-to-image';
 
-const screenshotCapture = ({ screenshotRef }) => {
+const screenshot_capture = ({ screenshotRef }) => {
   const [screenshot, setScreenshot] = useState(null);
 
   const captureScreenshot = () => {
@@ -27,4 +27,4 @@ const screenshotCapture = ({ screenshotRef }) => {
   );
 };
 
-export default screenshotCapture;
+export default screenshot_capture;

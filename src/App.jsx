@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Counter from "./components/counter.jsx";
-import ScreenshotCapture from './components/screenshotCapture.jsx';
+import ScreenshotCapture from './components/screenshot_capture.jsx';
 
 function App() {
   const today = new Date();
