@@ -32,11 +32,11 @@ function App() {
     { name: 'ガーリックチーズ', count: 0, genre: '4' },
     { name: 'みそハバーティ', count: 0, genre: '4' },
     { name: 'ゆずねぎチーズ', count: 0, genre: '4' },
-    { name: 'アップルシナモン', count: 0, genre: '5' },
-    { name: 'もちロールきなこ', count: 0, genre: '5' },
-    { name: 'もちロール黒ゴマ', count: 0, genre: '5' },
-    { name: 'ゆず抹茶スワール', count: 0, genre: '5' },
-    { name: 'オレンジチョコスワール', count: 0, genre: '5' },
+    { name: 'アップルシナモン', count: 0, genre: '4' },
+    { name: 'もちロールきなこ', count: 0, genre: '4' },
+    { name: 'もちロール黒ゴマ', count: 0, genre: '4' },
+    { name: 'ゆず抹茶スワール', count: 0, genre: '4' },
+    { name: 'オレンジチョコスワール', count: 0, genre: '4' },
     { name: 'ゆずデニッシュ', count: 0, genre: '5' },
     { name: 'もちあんこパイ', count: 0, genre: '5' },
     { name: 'もちケーキプレーン', count: 0, genre: '5' },
@@ -54,6 +54,19 @@ function App() {
     { name: 'ゆず七味(土曜限定)', count: 0, genre: '6' },
     { name: 'カツサンド(土曜限定)', count: 0, genre: '6' },
     { name: 'えびカツサンド(土曜限定)', count: 0, genre: '6' },
+    { name: 'モンブランタルト', count: 0, genre: '7' },
+    { name: 'イチゴショート', count: 0, genre: '7' },
+    { name: 'イチゴ大福', count: 0, genre: '7' },
+    { name: 'どら焼き', count: 0, genre: '7' },
+    { name: 'ナナイモバー抹茶', count: 0, genre: '7' },
+    { name: 'ナナイモバー黒ゴマ', count: 0, genre: '7' },
+    { name: '柚子レモンバー', count: 0, genre: '7' },
+    { name: 'ケーキポップ', count: 0, genre: '7' },
+    { name: 'プリン', count: 0, genre: '7' },
+    { name: 'チーズスフレ', count: 0, genre: '7' },
+    { name: 'Day Old MCR', count: 0, genre: '7' },
+    { name: 'Day Old 山食', count: 0, genre: '7' },
+    { name: 'Day Old ディナーロール', count: 0, genre: '7' },
   ];
   
   const [breadData, setBreadData] = useState(initialBreadData);
@@ -76,6 +89,7 @@ function App() {
   const genre4 = breadData.filter((bread) => bread.genre === "4");
   const genre5 = breadData.filter((bread) => bread.genre === "5");
   const genre6 = breadData.filter((bread) => bread.genre === "6");
+  const genre7 = breadData.filter((bread) => bread.genre === "7");
 
   return (
     <>
@@ -144,6 +158,17 @@ function App() {
           </div>
           <div className="genre6">
             {genre6.map((bread) => (
+              <Counter 
+                key={bread.name}
+                bread={bread.name}
+                count={bread.count}
+                onIncrement={() => updateBreadCount(bread.name, 1)}
+                onDecrement={() => updateBreadCount(bread.name, -1)}
+              />
+            ))}
+          </div>
+          <div className="genre7">
+            {genre7.map((bread) => (
               <Counter 
                 key={bread.name}
                 bread={bread.name}
